@@ -21,7 +21,7 @@ jQuery.fn.uniform = function(settings) {
       form.find('.' + settings.focused_class).removeClass(settings.focused_class);
     };
 
-    // Select form fields and attach them higlighter functionality
+    // Select form fields and attach the highlighter functionality
     form.find(settings.field_selector).focus(function() {
       removeFocusClass();
       focusControlHolder(jQuery(this));
