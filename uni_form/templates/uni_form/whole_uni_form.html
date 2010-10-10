@@ -33,4 +33,6 @@
             {% endfor %}
         </div>
     {% endif %}
+    <input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
+    {{ previous_fields|safe }}
 {% if form_tag %}</form>{% endif %}

@@ -141,6 +141,13 @@ class BasicNode(template.Node):
                         'toggle_fields': final_toggle_fields
                         }
 
+        # propagate FormWizard fields
+        wizard_info = dict(
+            (fld, context.get(fld, None))
+            for fld in ('step_field', 'step0', 'step', 'step_count', 'form', 'previous_fields')
+        )
+        response_dict.update(wizard_info)
+
         if not is_old_django: # TODO: remove when pre-CSRF token templatetags are no longer supported
             if use_csrf_protection and context.has_key('csrf_token'):
                 response_dict['csrf_token'] = context['csrf_token']

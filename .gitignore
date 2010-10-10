@@ -9,6 +9,8 @@ downloads/*
 
 #egg's specific
 *.egg-info
+build
+dist
 
 #defaults
 *.pyc
