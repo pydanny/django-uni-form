@@ -1,0 +1,9 @@
+{% load uni_form_tags %}
+    
+{{ formset.management_form }}
+{% for form in formset.forms %}
+    {% with form.helper as helper %}
+        {% uni_form form helper %}
+    {% endwith %}
+
+{% endfor %}

@@ -133,6 +133,18 @@ class Fieldset(object):
         html += u'</fieldset>'
         return html
 
+class InlineFormSet(object):
+    def __init__(self, formset_name, **kwargs):
+        self.formset_name = formset_name
+        self.css = kwargs.get('css_class', u'')
+        self.template = kwargs.get('template', "uni_form/formset.html")
+
+    def render(self, form):
+        output = u'<div class="%s">' % self.css
+        formset = getattr(form, self.formset_name)
+        output += render_to_string(self.template, {'formset': formset})
+        output += u'</div>'
+        return u''.join(output)
 
 class AlternateField(object):
     ''' multiField container. Renders to a multiField <div> '''
