@@ -22,13 +22,13 @@ class FormHelpersException(Exception):
 class Submit(BaseInput):
     """
         Used to create a Submit button descriptor for the uni_form template tag:
-            
+
             submit = Submit('Search the Site','search this site')
-        
+
         Note: The first argument is also slugified and turned into the id for the submit button.
-    
+
     """
-    
+
     input_type = 'submit'
     field_classes = 'submit submitButton'
 
@@ -36,12 +36,12 @@ class Submit(BaseInput):
 class Button(BaseInput):
     """
         Used to create a Submit input descriptor for the uni_form template tag:
-            
+
             button = Button('Button 1','Press Me!')
-        
+
         Note: The first argument is also slugified and turned into the id for the button.
     """
-    
+
     input_type = 'button'
     field_classes = 'button'
 
@@ -49,20 +49,20 @@ class Hidden(BaseInput):
     """
         Used to create a Hidden input descriptor for the uni_form template tag.
     """
-    
+
     input_type = 'hidden'
     field_classes = 'hidden'
 
 class Reset(BaseInput):
     """
         Used to create a Hidden input descriptor for the uni_form template tag.
-            
+
             reset = Reset('Reset This Form','Revert Me!')
-        
+
         Note: The first argument is also slugified and turned into the id for the reset.
-    
+
     """
-    
+
     input_type = 'reset'
     field_classes = 'reset resetButton'
 
@@ -87,9 +87,9 @@ def render_field(field, form, template="uni_form/field.html", labelclass=None):
 class Layout(object):
     '''
     Form Layout, add fieldsets, rows, fields and html
-    
+
     example:
-    
+
     >>> layout = Layout(Fieldset('', 'is_company'),
     ...     Fieldset(_('Contact details'),
     ...         'email',
@@ -102,7 +102,7 @@ class Layout(object):
     '''
     def __init__(self, *fields):
         self.fields = fields
-    
+
     def render(self, form):
         html = ""
         for field in self.fields:
@@ -113,15 +113,15 @@ class Layout(object):
         return html
 
 class Fieldset(object):
-    
+
     ''' Fieldset container. Renders to a <fieldset>. '''
-    
+
     def __init__(self, legend, *fields, **args):
         self.css = args.get('css_class', None)
         self.legend = legend
         self.fields = fields
 
-    
+
     def render(self, form):
         if self.css:
             html = u'<fieldset class="%s">' % self.css
@@ -164,10 +164,7 @@ class MultiField(object):
             if bound_field.help_text:
                 helptext += u'<p id="hint_%s" class="formHint">%s</p>' % (auto_id, bound_field.help_text)
 
-        if errors:
-            self.css += u' error'
-
-        output = u'<div class="%s">\n' % self.div_class
+        output = u'<div class="%s%s">\n' % (self.div_class, errors and u' error' or u'')
         output += errors
         output += self.label_html
         output += u'<div class="multiField">\n'
@@ -208,12 +205,12 @@ class Column(object):
 
 
 class HTML(object):
-    
+
     ''' HTML container '''
-    
+
     def __init__(self, html):
         self.html = unicode(html)
-    
+
     def render(self, form):
         return self.html
 
@@ -223,24 +220,24 @@ class FormHelper(object):
         By setting attributes to me you can easily create the text that goes
         into the uni_form template tag. One use case is to add to your form
         class.
-        
+
         Special attribute behavior:
-            
+
             method: Defaults to POST but you can also do 'GET'
-            
+
             form_action: applied to the form action attribute. Can be a named url in
                 your urlconf that can be executed via the *url* default template tag or can
                 simply point to another URL.
-            
+
             id: Generates a form id for dom identification.
                 If no id provided then no id attribute is created on the form.
-            
+
             class: add space seperated classes to the class list.
                 Defaults to uniForm.
                 Always starts with uniForm even do specify classes.
-            
+
             form_tag: Defaults to True. If set to False it renders the form without the form tags.
-            
+
             use_csrf_protection: Defaults to True. If set to True a CSRF protection token is
                 rendered in the form. This should only be set as False for forms targeting
                 external sites or internal sites without CSRF protection (as described in the
@@ -248,11 +245,11 @@ class FormHelper(object):
                 Requires the presence of a csrf token in the current context with the identifier
                 "csrf_token" (which is automatically added to your context when using RequestContext).
 
-        
+
         Demonstration:
-            
+
             First we create a MyForm class and instantiate it
-            
+
             >>> from django import forms
             >>> from uni_form.helpers import FormHelper, Submit, Reset
             >>> from django.utils.translation import ugettext_lazy as _
@@ -266,13 +263,13 @@ class FormHelper(object):
             ...     helper.add_input(submit)
             ...     reset = Reset('reset','reset button')
             ...     helper.add_input(reset)
-            
+
             After this in the template::
-                
+
                 {% load uni_form_tags %}
                 {% uni_form form form.helper %}
 
-    
+
     """
     _form_method = 'post'
     _form_action = ''
@@ -283,52 +280,52 @@ class FormHelper(object):
     form_tag = True
     use_csrf_protection = True
 
-    
+
     def __init__(self):
-        
+
         self.inputs = self.inputs[:]
         self.toggle = Toggle()
-    
+
     def get_form_method(self):
         return self._form_method
-    
+
     def set_form_method(self, method):
         if method.lower() not in ('get','post'):
             raise FormHelpersException('Only GET and POST are valid in the \
                     form_method helper attribute')
-        
+
         self._form_method = method.lower()
-    
+
     # we set properties the old way because we want to support pre-2.6 python
     form_method = property(get_form_method, set_form_method)
-    
+
     def get_form_action(self):
         return self._form_action
-    
+
     def set_form_action(self, action):
         try:
             self._form_action = reverse(action)
         except NoReverseMatch:
             self._form_action = action
-    
+
     # we set properties the old way because we want to support pre-2.6 python
     form_action = property(get_form_action, set_form_action)
-    
+
     def add_input(self, input_object):
         self.inputs.append(input_object)
-    
+
     def add_layout(self, layout):
         self.layout = layout
-    
+
     def render_layout(self, form):
         return mark_safe(self.layout.render(form))
-    
+
     def get_attr(self):
         items = {}
         items['form_method'] = self.form_method.strip()
         items['form_tag'] = self.form_tag
         items['use_csrf_protection'] = self.use_csrf_protection
-        
+
         if self.form_action:
             items['form_action'] = self.form_action.strip()
         if self.form_id:
@@ -340,4 +337,3 @@ class FormHelper(object):
         if self.toggle.fields:
             items['toggle_fields'] = self.toggle.fields
         return items
-
