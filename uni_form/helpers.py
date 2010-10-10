@@ -134,6 +134,44 @@ class Fieldset(object):
         return html
 
 
+class AlternateField(object):
+    ''' multiField container. Renders to a multiField <div> '''
+
+    def __init__(self, label, *fields, **kwargs):
+        #TODO: Decide on how to support css classes for both container divs
+        self.div_class = kwargs.get('css_class', u'ctrlHolder')
+        self.label_class = kwargs.get('label_class', u'blockLabel')
+        self.label_html = label and (u'<p class="label">%s</p>\n' % unicode(label)) or ''
+        self.fields = fields
+
+    def render(self, form):
+        fieldoutput = u''
+        errors = u''
+        helptext = u''
+        count = 0
+        for field in self.fields:
+            fieldoutput += u'<li>%s</li>' % render_field(field, form, 'uni_form/multifield.html', self.label_class)
+            try:
+                field_instance = form.fields[field]
+            except KeyError:
+                raise Exception("Could not resolve form field '%s'." % field)
+            bound_field = BoundField(form, field_instance, field)
+            auto_id = bound_field.auto_id
+            for error in bound_field.errors:
+                errors += u'<p id="error_%i_%s" class="errorField">%s: %s</p>' % (count, auto_id, bound_field.label, error)
+                count += 1
+            if bound_field.help_text:
+                helptext += u'<p id="hint_%s" class="formHint">%s</p>' % (auto_id, bound_field.help_text)
+
+        output = u'<div class="%s%s">\n' % (self.div_class, errors and u' error' or u'')
+        output += errors
+        output += self.label_html
+        output += u'<div class="multiField"><ul class="alternate">\n'
+        output += fieldoutput
+        output += u'</ul></div>\n'
+        output += helptext
+        output += u'</div>\n'
+        return output
 
 class MultiField(object):
     ''' multiField container. Renders to a multiField <div> '''
