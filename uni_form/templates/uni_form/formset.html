@@ -1,9 +1,10 @@
 {% load uni_form_tags %}
-    
+
 {{ formset.management_form }}
 {% for form in formset.forms %}
+<div class="{{ group_css }}">
     {% with form.helper as helper %}
         {% uni_form form helper %}
     {% endwith %}
-
+</div>
 {% endfor %}
