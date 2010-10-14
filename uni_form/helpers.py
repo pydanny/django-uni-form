@@ -134,8 +134,9 @@ class Fieldset(object):
         return html
 
 class InlineFormSet(object):
-    def __init__(self, formset_name, **kwargs):
+    def __init__(self, formset_name, *fields, **kwargs):
         self.formset_name = formset_name
+        self.fields = fields
         self.css = kwargs.get('css_class', u'formset')
         self.group_css = kwargs.get('group_css_class', u'formsetGroup')
         self.template = kwargs.get('template', "uni_form/formset.html")
@@ -144,6 +145,8 @@ class InlineFormSet(object):
         output = u'<div class="%s">' % self.css
         formset = getattr(form, self.formset_name)
         output += render_to_string(self.template, {'formset': formset, 'group_css': self.group_css})
+        for field in self.fields:
+            output += render_field(field, form)
         output += u'</div>'
         return u''.join(output)
 

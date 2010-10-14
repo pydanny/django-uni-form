@@ -1,10 +1,19 @@
 {% load uni_form_tags %}
 
 {{ formset.management_form }}
+<div class="emptyTemplate" style="display:none;">
+{% with formset.empty_form as form %}
+    {% with form.helper as helper %}
+        {% uni_form form helper %}
+    {% endwith %}
+{% endwith %}
+</div>
+
 {% for form in formset.forms %}
 <div class="{{ group_css }}">
     {% with form.helper as helper %}
         {% uni_form form helper %}
     {% endwith %}
+    
 </div>
 {% endfor %}
