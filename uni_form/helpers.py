@@ -157,7 +157,7 @@ class AlternateField(object):
         #TODO: Decide on how to support css classes for both container divs
         self.div_class = kwargs.get('css_class', u'ctrlHolder')
         self.label_class = kwargs.get('label_class', u'blockLabel')
-        self.label_html = label and (u'<p class="label">%s</p>\n' % unicode(label)) or ''
+        self.label = label
         self.fields = fields
 
     def render(self, form):
@@ -181,7 +181,7 @@ class AlternateField(object):
 
         output = u'<div class="%s%s">\n' % (self.div_class, errors and u' error' or u'')
         output += errors
-        output += self.label_html
+        output += self.label and (u'<p class="label">%s</p>\n' % unicode(self.label)) or ''
         output += u'<div class="multiField"><ul class="alternate">\n'
         output += fieldoutput
         output += u'</ul></div>\n'
@@ -196,7 +196,7 @@ class MultiField(object):
         #TODO: Decide on how to support css classes for both container divs
         self.div_class = kwargs.get('css_class', u'ctrlHolder')
         self.label_class = kwargs.get('label_class', u'blockLabel')
-        self.label_html = label and (u'<p class="label">%s</p>\n' % unicode(label)) or ''
+        self.label = label
         self.fields = fields
 
     def render(self, form):
@@ -220,7 +220,7 @@ class MultiField(object):
 
         output = u'<div class="%s%s">\n' % (self.div_class, errors and u' error' or u'')
         output += errors
-        output += self.label_html
+        output += self.label and (u'<p class="label">%s</p>\n' % unicode(self.label)) or ''
         output += u'<div class="multiField">\n'
         output += fieldoutput
         output += u'</div>\n'
