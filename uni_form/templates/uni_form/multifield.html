@@ -1,4 +1,4 @@
-{% load uni_form_field %}
+{% load i18n uni_form_field %}
 
 {% if field.is_hidden %}
     {{ field }}
@@ -11,11 +11,11 @@
     {% if field|is_checkbox %}
         {{ field|with_class }}
     {% endif %}
-    
+
     {% if field.label %}
-        {{ field.label }}
+        {% trans field.label %}
     {% endif %}
-    
+
     {% if not field|is_checkbox %}
         {{ field|with_class }}
     {% endif %}
@@ -23,5 +23,5 @@
     {% if field.label %}
         </label>
     {% endif %}
-    
+
 {% endif %}
