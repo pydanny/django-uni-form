@@ -262,11 +262,15 @@ class HTML(object):
 
     ''' HTML container '''
 
-    def __init__(self, html):
+    def __init__(self, html, *args, **kwargs):
         self.html = unicode(html)
+        self.vars = args or kwargs
 
     def render(self, form):
-        return self.html
+        if self.vars:
+            return self.html % self.vars
+        else:
+            return self.html
 
 
 class FormHelper(object):
