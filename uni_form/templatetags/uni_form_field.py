@@ -3,6 +3,7 @@ from django import template
 register = template.Library()
 
 class_converter = {
+    "passwordinput":"textinput textInput",
     "textinput":"textinput textInput",
     "fileinput":"fileinput fileUpload"
 }
