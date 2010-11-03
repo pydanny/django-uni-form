@@ -150,6 +150,23 @@ class InlineFormSet(object):
         output += u'</div>'
         return u''.join(output)
 
+
+class InlineForm(object):
+    def __init__(self, form_name, *fields, **kwargs):
+        self.form_name = form_name
+        self.fields = fields
+        self.css = kwargs.get('css_class', u'')
+        self.template = kwargs.get('template', "uni_form/uni_form.html")
+
+    def render(self, form):
+        output = u'<div class="%s">' % self.css
+        inner_form = getattr(form, self.form_name)
+        output += render_to_string(self.template, {'form': inner_form})
+        for field in self.fields:
+            output += render_field(field, form)
+        output += u'</div>'
+        return u''.join(output)
+
 class AlternateField(object):
     ''' multiField container. Renders to a multiField <div> '''
 
