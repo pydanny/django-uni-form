@@ -174,6 +174,7 @@ class AlternateField(object):
         #TODO: Decide on how to support css classes for both container divs
         self.div_class = kwargs.get('css_class', u'ctrlHolder')
         self.label_class = kwargs.get('label_class', u'blockLabel')
+        self.required_html = kwargs.get('required_html', u'<span>*</span>')
         self.label = label
         self.fields = fields
 
@@ -182,12 +183,14 @@ class AlternateField(object):
         errors = u''
         helptext = u''
         count = 0
+        any_required = False
         for field in self.fields:
             fieldoutput += u'<li>%s</li>' % render_field(field, form, 'uni_form/multifield.html', self.label_class)
             try:
                 field_instance = form.fields[field]
             except KeyError:
                 raise Exception("Could not resolve form field '%s'." % field)
+            any_required |= field_instance.required
             bound_field = BoundField(form, field_instance, field)
             auto_id = bound_field.auto_id
             for error in bound_field.errors:
@@ -198,7 +201,7 @@ class AlternateField(object):
 
         output = u'<div class="%s%s">\n' % (self.div_class, errors and u' error' or u'')
         output += errors
-        output += self.label and (u'<p class="label">%s</p>\n' % unicode(self.label)) or ''
+        output += self.label and (u'<p class="label">%s%s</p>\n' % (unicode(self.label), any_required and self.required_html or '')) or ''
         output += u'<div class="multiField"><ul class="alternate">\n'
         output += fieldoutput
         output += u'</ul></div>\n'
