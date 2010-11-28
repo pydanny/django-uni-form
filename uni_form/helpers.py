@@ -161,9 +161,12 @@ class InlineForm(object):
     def render(self, form):
         output = u'<div class="%s">' % self.css
         inner_form = getattr(form, self.form_name)
-        output += render_to_string(self.template, {'form': inner_form})
-        for field in self.fields:
-            output += render_field(field, form)
+        if hasattr(inner_form, 'helper'):
+            output += inner_form.helper.layout.render(inner_form)
+        else:
+            output += render_to_string(self.template, {'form': inner_form})
+            for field in self.fields:
+                output += render_field(field, form)
         output += u'</div>'
         return u''.join(output)
 
