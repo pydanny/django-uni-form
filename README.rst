@@ -115,6 +115,10 @@ Using the django-uni-form filter (Easy and fun!)
 
     {{ my_form|as_uni_form }}
 
+   Or, to render a formset::
+
+    {{ my_formset|as_uni_form_set }}
+
 3. Add the class of 'uniForm' to your form. Example::
 
     <form action="" method="post" class="uniForm">
@@ -159,6 +163,14 @@ Using the django-uni-form templatetag in your view (Intermediate)
     
     {% uni_form form helper %}
 
+   To render a formset, use the following instead::
+
+    {% uni_form_set formset helper %}
+
+   Note that ``toggle_fields`` is currently not supported for
+   formsets.  If you provide a layout in the helper, it is applied to
+   each subform separately.
+
 Using the django-uni-form templatetag in your form class (Intermediate)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 1. In your form class add the following after field definitions::
@@ -187,7 +199,38 @@ Using the django-uni-form templatetag in your form class (Intermediate)
     {% with form.helper as helper %}
         {% uni_form form helper %}
     {% endwith %}
-    
+
+Using the django-uni-form templatetag in your formset class (Intermediate)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+To render repeated forms using Django's formsets and django-uni-form,
+use the ``{% uni_form_set %}`` template tag.
+
+1. In your formset class add the following::
+
+    from uni_form.helpers import FormHelper, Submit, Reset
+
+    MyFormset = forms.formsets.formset_factory(MyForm)
+
+    # Attach a formHelper to your formset class.
+    MyFormset.helper = FormHelper()
+
+    # Add in a class and id
+    helper.form_id = 'this-formset-rocks'
+    helper.form_class = 'save-multiple'
+
+    # add in a submit and reset button
+    submit = Submit('save', 'Save these items')
+    helper.add_input(submit)
+    reset = Reset('reset', 'Reset the form')
+    helper.add_input(reset)
+
+2. In your template do the following::
+
+    {% load uni_form_tags %}
+    {% with formset.helper as helper %}
+        {% uni_form_set formset helper %}
+    {% endwith %}
+
 Using the django-uni-form templatetag to change action/method (Intermediate)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 1. In your form class add the following after field definitions::
@@ -278,6 +321,10 @@ Then, just like in the previous example, add the following to your template::
            
 
 This allows you to group fields in fieldsets, or rows or columns or add HTML between fields etc.
+
+This method is also valid when using the ``{% uni_form_set %}``
+template tag.  The layout is applied separately to each subform of the
+formset.
 
 .. _Django: http://djangoproject.com
 .. _`Uni-form`: http://sprawsm.com/uni-form

@@ -27,4 +27,6 @@ Patrick Lauber <digi604>
 Patryk Zawadzki <patrys>
 Skylar Saveland <skyl>
 Stepan Rakhimov
+Victor Nagy <nagyv>
+Antti Kaihola <akaihola>
 John Maxwell <astrofinch>

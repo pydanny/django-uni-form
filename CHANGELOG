@@ -21,6 +21,8 @@ For 0.8.0
  links) can be added to field labels
  * Thanks to Stepan Rakhimov fixed an admin datetime issue.
  * Thanks to patrys (Patryk Zawadzki) FormHelper class is now easily subclass-able.
+ * Added support for formsets by introducing the as_uni_form_set filter
+ * Added contributors of the formsets feature
 
 For 0.7.0
 
