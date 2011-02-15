@@ -381,13 +381,13 @@ class FormHelper(object):
     form_method = property(get_form_method, set_form_method)
 
     def get_form_action(self):
-        return self._form_action
+        try:
+            return reverse(self._form_action)
+        except NoReverseMatch:
+            return self._form_action
 
     def set_form_action(self, action):
-        try:
-            self._form_action = reverse(action)
-        except NoReverseMatch:
-            self._form_action = action
+        self._form_action = action
 
     # we set properties the old way because we want to support pre-2.6 python
     form_action = property(get_form_action, set_form_action)
