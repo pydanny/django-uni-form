@@ -11,9 +11,27 @@
 
 {% for form in formset.forms %}
 <div class="{{ group_css }}">
+    {% if form.non_field_errors %}
+    <div class="ctrlHolder error">
+        {% for error in form.non_field_errors %}
+        <p class="errorField">{{ error }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% for hidden in form.hidden_fields %}
+        {% if hidden.errors %}
+            <div class="ctrlHolder error">
+            {% for error in hidden.errors %}
+                <p class="errorField">{{ hidden.label }}: {{ error }}</p>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endfor %}
+
     {% with form.helper as helper %}
         {% uni_form form helper %}
     {% endwith %}
-    
+
 </div>
 {% endfor %}
