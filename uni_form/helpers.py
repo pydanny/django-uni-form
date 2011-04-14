@@ -165,7 +165,7 @@ class MultiField(object):
                 helptext += u'<p id="hint_%s" class="formHint">%s</p>' % (auto_id, bound_field.help_text)
 
         if errors:
-            self.css += u' error'
+            self.div_class += u' error'
 
         output = u'<div class="%s">\n' % self.div_class
         output += errors
