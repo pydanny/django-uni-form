@@ -241,7 +241,7 @@ with an instance of ContactPersonsFormset. You could do it like this in a view::
         ...
         
         if request.method == 'POST':
-            form = forms.CompanySubmitForm(request.POST, instance=company)
+            form = forms.CompanyForm(request.POST, instance=company)
             contact_persons_formset = ContactPersonFormset(request.POST, prefix='contact_persons', instance=company)
             
             if form.is_valid() and contact_persons_formset.is_valid():
@@ -251,7 +251,7 @@ with an instance of ContactPersonsFormset. You could do it like this in a view::
                     obj.company = company
                     obj.save()
         else:
-            form = forms.CompanySubmitForm(instance=company)
+            form = CompanyForm(instance=company)
             contact_persons_formset = ContactPersonFormset(prefix='contact_persons', instance=company)
             
         form.contact_persons = contact_persons_formset
