@@ -13,7 +13,7 @@
     {% endif %}
     
     {% if field.label %}
-        {{ field.label }}
+        {{ field.label|safe }}
     {% endif %}
     
     {% if not field|is_checkbox %}
