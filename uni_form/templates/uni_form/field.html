@@ -1,4 +1,4 @@
-{% load i18n uni_form_field %}
+{% load uni_form_field %}
 
 {% if field.is_hidden %}
     {{ field }}
@@ -6,20 +6,20 @@
     <div id="div_{{ field.auto_id }}" class="ctrlHolder{% if field.errors %} error{% endif %}{% if field|is_checkbox %} checkbox{% endif %}">
         {% for error in field.errors %}
             <p id="error_{{ forloop.counter }}_{{ field.auto_id }}" class="errorField">
-                {% trans error|safe %}
+                {{ error|safe }}
             </p>
         {% endfor %}
 
         {% if field.label %}
             <label for="{{ field.auto_id }}">
-                {% trans field.label|safe %}{% if field.field.required %}<span>*</span>{% endif %}
+                {{ field.label|safe }}{% if field.field.required %}<span>*</span>{% endif %}
             </label>
         {% endif %}
 
         {{ field|with_class }}
 
         {% if field.help_text %}
-            <p id="hint_{{ field.auto_id }}" class="formHint">{% trans field.help_text|safe %}</p>
+            <p id="hint_{{ field.auto_id }}" class="formHint">{{ field.help_text|safe }}</p>
         {% endif %}
     </div>
 {% endif %}
