@@ -253,6 +253,8 @@ with an instance of ContactPersonsFormset. You could do it like this in a view::
         else:
             form = forms.CompanySubmitForm(instance=company)
             contact_persons_formset = ContactPersonFormset(prefix='contact_persons', instance=company)
+            
+        form.contact_persons = contact_persons_formset
     
 Template code is like in the previous example::
     
