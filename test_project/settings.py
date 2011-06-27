@@ -6,9 +6,7 @@ import os.path
 from os.path import join, abspath, dirname
 from django import get_version # TODO: remove when pre-CSRF token templatetags are no longer supported
 
-PROJECT_ROOT = abspath(dirname(__file__))
-PROJECT_ROOT = PROJECT_ROOT.replace('uni_form/tests/test_project','')
-
+PROJECT_ROOT = os.path.dirname(__file__)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -45,7 +43,7 @@ USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = PROJECT_ROOT.replace('/test_project','/uni_form/media/uni_form')
+MEDIA_ROOT = PROJECT_ROOT+'\static'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -87,8 +85,12 @@ ROOT_URLCONF = 'test_project.urls'
 
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_ROOT.replace('/test_project',''), "uni_form", "media", "uni_form"),    
+    os.path.join(PROJECT_ROOT, "test_app", "templates"),        
 )
+
+STATIC_DOC_ROOT=PROJECT_ROOT+os.sep+"static"
+STATIC_ROOT = PROJECT_ROOT+'\static'
+STATIC_URL = '/static/'
 
 INSTALLED_APPS = (
     'django.contrib.auth',

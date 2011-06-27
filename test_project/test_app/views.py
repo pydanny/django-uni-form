@@ -1,8 +1,9 @@
 from django.conf import settings
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.http import HttpResponseRedirect
 
-from uni_form.helpers import FormHelper, Submit, Reset, Hidden
+from uni_form.helpers import FormHelper, Submit, Reset, Hidden, Cancel
 
 from test_app.forms import TestForm, HelperTestForm, LayoutTestForm, MessageResponseForm
 
@@ -163,3 +164,42 @@ def csrf_token_test(request):
     return render_to_response('test_app/generic_form_test.html', 
         response_dictionary, 
         context_instance=RequestContext(request))    
+
+def cancel_button_v(request):
+    """
+    Note that for Cancel Button to pass the form validation in views.py
+    you have to check whether the cancel button was pressed or not.
+    Other way, would be to include a middleware which checks for 
+    any cancel events and suitably redirect it.
+    For eg. can have a hidden variable in the form, which would have the redirect-to
+    path when the form is cancelled.
+    """
+    # Create the form
+    if request.method == "POST":
+      if 'cancel' in request.POST:
+        return HttpResponseRedirect("/")
+      else:
+        form = TestForm(request.POST)
+    else:
+        form = TestForm()
+
+    # create a formHelper
+    helper = FormHelper()
+
+    # Add in a class and id
+    helper.form_id = 'this-form-rocks'
+    helper.form_class = 'search'
+
+    # add in a submit and reset button
+    submit = Submit('search','search this site')
+    helper.add_input(submit)
+    cancel = Cancel('cancel','Cancel')
+    helper.add_input(cancel)
+    
+
+    # create the response dictionary
+    response_dictionary = {'form':form, 'helper': helper, 'title':'Cancel Button test - should redirect to "basic tests" '}
+    
+    return render_to_response('test_app/generic_form_test.html', 
+        response_dictionary, 
+        context_instance=RequestContext(request)) 
