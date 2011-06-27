@@ -19,9 +19,7 @@
                 zoom: 1; /* trigger hasLayout */
             }
         </style><![endif]-->
-        <style>
-            {% include "uni-form.css" %}
-        </style>
+        <link rel="stylesheet" href="{{STATIC_URL}}uni_form/uni-form.css" type="text/css" media="screen" />
         <style>
         /* You don't need these, they are here to tune up the page */
               html{ color: #343434; background: #bcc2c6 url(bg.png); font-size: 14px; line-height: 1.5; font-family: "Lucida Sans Unicode", "Lucida Grande", Arial, Verdana, sans-serif; }
@@ -100,9 +98,7 @@
         					* html .browse{ position: absolute; }        
         </style>
         
-        <style>
-            {% include "default.uni-form.css" %}        
-        </style>
+        <link rel="stylesheet" href="{{STATIC_URL}}uni_form/default.uni-form.css" type="text/css" media="screen" />
 
         {% block extra_head_base %}
             {% block extra_head %}{% endblock %}
@@ -132,7 +128,7 @@
           </ul> 
         </div>        
 
-<script type="text/javascript">{% include "jquery.js" %}</script> 
-<script type="text/javascript">{% include "uni-form.jquery.js" %}</script>
+        <script type="text/javascript" src="{{STATIC_URL}}uni_form/jquery.js"></script> 
+        <script type="text/javascript" src="{{STATIC_URL}}uni_form/uni-form.jquery.js"></script> 
     </body>
 </html>
