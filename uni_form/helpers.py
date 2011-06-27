@@ -130,6 +130,19 @@ class Reset(BaseInput):
     input_type = 'reset'
     field_classes = 'reset resetButton'
 
+class Cancel(BaseInput):
+    """
+    Used to create a Hidden input descriptor for the uni_form template tag::
+    
+        cancel = Cancel('Cancel This Form', 'Escape!')
+    
+    .. note:: The first argument is also slugified and turned into the id for the reset.
+    """
+    input_type = 'submit'
+    # the style is being set as cancel, as jquery-validate prefers to have the
+    # class=cancel
+    field_classes = 'cancel' 
+
 
 def render_field(field, form, form_style, context, template="uni_form/field.html", labelclass=None):
     """
