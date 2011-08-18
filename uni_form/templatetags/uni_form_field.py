@@ -23,6 +23,9 @@ def with_class(field):
     else:
         css_class = class_name
 
+    if field.field.required:
+        css_class += ' required'
+
     return field.as_widget(attrs={'class': css_class})    
 
 
