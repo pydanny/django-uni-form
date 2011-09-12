@@ -176,7 +176,7 @@ def render_field(field, form, form_style, context, template="uni_form/field.html
         html = ''
     else:
         bound_field = BoundField(form, field_instance, field)
-        html = render_to_string(template, {'field': bound_field, 'labelclass': labelclass})
+        html = render_to_string(template, {'field': bound_field, 'labelclass': labelclass}, context)
 
     return html
 
