@@ -108,7 +108,7 @@ class Submit(BaseInput):
     .. note:: The first argument is also slugified and turned into the id for the submit button.
     """
     input_type = 'submit'
-    field_classes = 'submit submitButton'
+    field_classes = 'submit submitButton primaryAction'
 
 
 class Button(BaseInput):
