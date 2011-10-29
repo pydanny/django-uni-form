@@ -45,7 +45,7 @@ From now onwards we will use the following form to exemplify how to use a helper
             label = "Additional notes or feedback",
             required = False,
         )
-        
+
 Let's see how helpers works step by step, with some examples explained. First you will need to import ``FormHelper``::
 
     from uni_form.helper import FormHelper
@@ -53,7 +53,7 @@ Let's see how helpers works step by step, with some examples explained. First yo
 Your helper can be a class level variable or an instance level variable, if you don't know what this means you might want to read the article "`Be careful how you use static variables in forms`_". As a rule of thumb, if you are not going to manipulate a form helper in your code, like in a view, you should be using a static helper, otherwise you should be using an instance level helper. If you still don't understand the subtle differences between both, use an instance level helper, because you won't end up suffering side effects. As in the next steps I will show you how to manipulate the form helper, so we will create an instance level helper. This is how you would do it::
 
     from uni_form.helper import FormHelper
-    
+
     class ExampleForm(forms.Form):
         [...]
         def __init__(self, *args, **kwargs):
@@ -79,9 +79,9 @@ As you can see you need to override the constructor and call the base class cons
 
 Note that we are importing here a class called ``Submit`` that is a layout object. We will see what layout objects are in detail later on, for now on let's just say that this adds a submit button to our form, so people can send their survey.
 
-We've also done some helper magic. ``FormHelper`` has a list of attributes that can be set, that affect mainly form attributes. Our form will have as DOM id ``id-exampleForm``, it will have as DOM CSS class ``blueForms``, it will use http ``POST`` to send information and its action will be set to ``reverse(submit_survey)``. 
+We've also done some helper magic. ``FormHelper`` has a list of attributes that can be set, that affect mainly form attributes. Our form will have as DOM id ``id-exampleForm``, it will have as DOM CSS class ``blueForms``, it will use http ``POST`` to send information and its action will be set to ``reverse(submit_survey)``.
 
-Let's how you render a form with a helper using django-uni-form custom tags. First we need to load django-uni-form tags in the templates we use them: 
+Let's how you render a form with a helper using django-uni-form custom tags. First we need to load django-uni-form tags in the templates we use them:
 
     {% load uni_form_tags %}
 
@@ -129,17 +129,17 @@ This is exactly the html that you would get::
 What you'll get is the form rendered as HTML with awesome bits. Specifically...
 
  * Opening and closing form tags, with id, class, action and method set as in the helper::
-    
+
     <form action="/submit/survey/" class="uniForm blueForms" method="post" id="id-exampleForm">
         [...]
     </form>
-    
+
  * Django's CSRF controls::
- 
+
     <div style='display:none'>
         <input type='hidden' name='csrfmiddlewaretoken' value='a643fab735d5ce6377ff456e73c4b1af' />
     </div>
- 
+
  * Submit button::
 
     <div class="buttonHolder">
@@ -159,16 +159,16 @@ Let's see how we could change any helper property in a view::
 
         # Form handling logic
         [...]
- 
+
         if redirect_url is not None:
             example_form.helper.form_action = reverse('submit_survey') + '?next=' + redirectUrl
-        
+
         return render_to_response(template_name, {'example_form': example_form}, context_instance=RequestContext(request))
 
 We are changing ``form_action`` helper property in case the view was called with a ``next`` GET parameter.
 
 
-Rendering several forms with helpers 
+Rendering several forms with helpers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Often we get asked, how do you render two or more forms, with their respective helpers, using ``{% uni_form %}`` tags, without having ``<form>`` tags rendered twice? Easy, you need to set ``form_tag`` helper property to False in every helper::
@@ -241,7 +241,7 @@ form_tag
 form_error_title
     If you are rendering a form using {% uni_form %} tag and it has non_field_errors to display, they are rendered in a div. You can set the title of the div with this attribute. Example: “Form Errors”.
 
-formset_error_title 
+formset_error_title
     If you are rendering a formset using {% uni_form %} tag and it has non_form_errors to display, they are rendered in a div. You can set the title of the div with this attribute. Example: “Formset Errors”.
 
 form_style
@@ -249,7 +249,7 @@ form_style
 
 
 =======
-Layouts 
+Layouts
 =======
 
 Fundamentals
@@ -302,7 +302,7 @@ This is just the peak of the iceberg. Now imagine you want to add an explanation
             'favorite_color',
             'favorite_food',
             HTML("""
-                <p>We use notes to get better, <strong>please help us {{ username }}</strong></p> 
+                <p>We use notes to get better, <strong>please help us {{ username }}</strong></p>
             """)
             'notes'
         )
@@ -351,7 +351,7 @@ Let's see an example of every layout object in use, to understand what parameter
     Submit('search', 'SEARCH')
 
 Renders to::
-    
+
     <input type="submit" name="search" value="SEARCH" class="submit submitButton" id="submit-id-search" />
 
 - **Hidden**: Used to create a hidden input::
@@ -359,9 +359,9 @@ Renders to::
     Hidden('name', 'value')
 
 - **Button**: Creates a button::
-    
+
     Button('name', 'value')
-    
+
 - **Reset**: Used to create a reset input::
 
     reset = Reset('name', 'value')
@@ -398,7 +398,7 @@ Overriding layout objects templates
 
 Django-uni-form provides a set of :ref:`layout objects`, that have been thoroughly designed to be flexible, standard compatible and support Django form features. Every Layout object is associated to a different template that lives in ``templates/uni_form/layout/`` directory.
 
-Some advanced users may want to use their own templates, to adapt the layout objects to their use or necessities. There are two ways to override the template that a layout object uses. 
+Some advanced users may want to use their own templates, to adapt the layout objects to their use or necessities. There are two ways to override the template that a layout object uses.
 
 - **Globally**: You override the template of the layout object, for all instances of that layout object you use::
 
@@ -415,7 +415,7 @@ Some advanced users may want to use their own templates, to adapt the layout obj
         )
     )
 
-Overriding project templates 
+Overriding project templates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You need to differentiate between layout objects templates and django-uni-form templates. There are some templates that live in ``templates/uni_form`` that define the form/formset structure, how a field or errors are rendered, etc. They add very little logic and are pretty much basic wrappers for the rest of django-uni-form power. This were thought to be used with uni-form, although they work without it, as they simply add some CSS classes that don't cause any trouble.
@@ -463,11 +463,11 @@ Imagine you have several forms that share a big chunk of the same layout. There 
         common_layout,
         Div(
             'professional_interests',
-            'job_description', 
+            'job_description',
         )
     )
 
-We have defined a ``common_layout`` that is used as a base for two different layouts: ``example_layout`` and ``example_layout2``, which means that those two layouts will start the same way and then extend the layout in different ways. 
+We have defined a ``common_layout`` that is used as a base for two different layouts: ``example_layout`` and ``example_layout2``, which means that those two layouts will start the same way and then extend the layout in different ways.
 
 
 Updating layouts on the go
@@ -505,4 +505,4 @@ This is how you would insert a layout object in the second position::
     Remember always that if you are going to manipulate a helper or layout in a view or any part of your code, you better use an instance level variable.
 
 
-.. _`Be careful how you use static variables in forms`: http://tothinkornottothink.com/post/7157151391/be-careful-how-you-use-static-variables-in-forms 
+.. _`Be careful how you use static variables in forms`: http://tothinkornottothink.com/post/7157151391/be-careful-how-you-use-static-variables-in-forms

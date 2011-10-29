@@ -12,14 +12,14 @@ Install into your python path using pip or easy_install::
 Or if you are running earlier than Django_ 1.2 and/or Python 2.5::
 
     pip install django-uni-form==0.7.0
-    
+
 Add `uni_form` to your INSTALLED_APPS in settings.py::
 
     INSTALLED_APPS = (
         ...
         'uni_form',
     )
-    
+
 Dependencies
 ~~~~~~~~~~~~
 
@@ -48,7 +48,7 @@ Beyond jQuery, `Uni-form`_ requires three static files. You can see how we call 
 2. Another way is to use Django's built-in **includes** template tag::
 
     {% include "uni_form/includes.html" %}
-    
+
 3. **ONLY FOR DJANGO 1.3 OR LATER** A third way is to use the django-uni-form **uni_form_setup** template tag.  Note that you'll need some additional setup for this::
 
     {% uni_form_setup %}
