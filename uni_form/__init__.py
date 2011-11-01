@@ -1,2 +1,2 @@
-__author__ = "Daniel Greenfeld"
-__version__="0.8.0"
+__author__ = "Miguel Araujo"
+__version__="0.9.0"
