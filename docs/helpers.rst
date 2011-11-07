@@ -382,7 +382,7 @@ Renders to::
 
 - **MultiField**: It wraps fields in a div with a label on top. When there are errors in the form submission it renders them in a list instead of each one surrounding the field::
 
-    Fieldset("Text for the label {{ username }}",
+    MultiField("Text for the label {{ username }}",
         'form_field_1',
         'form_field_2'
     )
