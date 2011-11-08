@@ -238,6 +238,10 @@ form_class
 form_tag
     It specifies if ``<form></form>`` tags should be rendered when using a Layout. If set to False it renders the form without the ``<form></form>`` tags. Defaults to True.
 
+legend
+    If you are rendering a form using {% uni_form %} tag, you can specify form or formset legend.
+ Example: “Enter the site” or “Set your details”.
+
 form_error_title
     If you are rendering a form using {% uni_form %} tag and it has non_field_errors to display, they are rendered in a div. You can set the title of the div with this attribute. Example: “Form Errors”.
 
