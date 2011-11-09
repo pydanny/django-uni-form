@@ -16,6 +16,9 @@ def is_checkbox(field):
 def with_class(field):
     class_name = field.field.widget.__class__.__name__.lower()
     class_name = class_converter.get(class_name, class_name)
-    field.field.widget.attrs['class'] = field.css_classes(extra_classes=class_name)
+    field.field.widget.attrs['class'] = " ".join(
+        (field.field.widget.get('class', ''),
+         field.css_classes(extra_classes=class_name))
+    )
 
     return field
