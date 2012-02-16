@@ -1,14 +1,12 @@
-===============
-django-uni-form
-===============
-
+===============================================
 django-crispy-form has replaced django-uni-form
-==================================================
+===============================================
+
 
 We've decided to move development on `django-uni-form` to `django-crispy-forms`_.  From now on, development on `django-uni-form` has been stopped, and any future work will be for security issues only on legacy code. 
 
-Introduction
-============
+django-uni-form
+================
 
 The best way to have Django_ DRY forms. Build programmatic reusable layouts out of components, having full control of the rendered HTML. All this without breaking the standard way of doing things in Django, so it plays nice with any other form application.
 
