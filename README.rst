@@ -42,4 +42,4 @@ django-uni-form only supports Django 1.2 or higher and Python 2.5.4, Python 2.6.
 
 .. _`Uni-form`: http://sprawsm.com/uni-form
 .. _Django: http://djangoproject.com
-.. _`django-crisp-forms`: https://github.com/maraujop/django-crispy-forms
+.. _`django-crispy-forms`: https://github.com/maraujop/django-crispy-forms
