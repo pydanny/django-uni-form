@@ -6,6 +6,8 @@ class_converter = {
     "textinput": "textinput textInput",
     "fileinput": "fileinput fileUpload",
     "passwordinput": "textinput textInput",
+    "checkboxselectmultiple": "inputs-list",
+    "radioselect": "inputs-list",
 }
 
 @register.filter
