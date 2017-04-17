@@ -12,8 +12,8 @@ The best way to have Django_ DRY forms. Build programmatic reusable layouts out 
 
 The application mainly provides:
 
-* A filter named ``|as_uni_form`` that will render elegant div based forms. Think of it as the built-in methods: ``as_table``, ``as_ul`` and ``as_p``. You cannot tune up the output, but it is easy to start using. 
-* A tag named ``{% uni_form %}`` that will render a form based on your configuration and specific layout setup. This gives you amazing power without much hassle, helping you save tons of time. 
+* A filter named ``|as_uni_form`` that will render elegant div based forms. Think of it as the built-in methods: ``as_table``, ``as_ul`` and ``as_p``. You cannot tune up the output, but it is easy to start using.
+* A tag named ``{% uni_form %}`` that will render a form based on your configuration and specific layout setup. This gives you amazing power without much hassle, helping you save tons of time.
 
 By default all the templates were designed to work with `Uni-form`_, but you can create your own or use other bundles available, `see the docs`_ for more information.
 

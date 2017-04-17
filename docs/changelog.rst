@@ -9,12 +9,12 @@ Change Log
 Built-in csrf support
 ----------------------
 
-Fully generated forms from the `uni_form` tag now have Django 1.2+'s support for csrf built-in. 
+Fully generated forms from the `uni_form` tag now have Django 1.2+'s support for csrf built-in.
 
 Field labels now with safe filter
 ----------------------------------
 
-This release renders django.form.field labels with the 'safe_' filter. If you have user generated form field labels you should take this into consideration. 
+This release renders django.form.field labels with the 'safe_' filter. If you have user generated form field labels you should take this into consideration.
 
 On the rare occasions this a problem, just create a **uni_form** directory in your templates directory, copy `uni_form/templates/uni_form/field.html` there, and remove the 'safe_' filter.
 
@@ -32,7 +32,7 @@ imports all the functions of `uni_form_filters`, so existing projects won't be a
 Removed {% uni_form_jquery %} tag
 ---------------------------------
 
-This was always somewhat problematic to get working. Static media should not be obfuscated via code and while this tag seemed helpful in practice it caused more headaches then what it was worth. 
+This was always somewhat problematic to get working. Static media should not be obfuscated via code and while this tag seemed helpful in practice it caused more headaches then what it was worth.
 
 Elevated Miguel Araujo to project lead
 --------------------------------------
@@ -57,13 +57,13 @@ Miscellaneous
 * Turning Layout and Fieldset fields into lists, so that they can be changed dynamically.
 * Changing formHints from paragraphs to divs, so ul or ol can be placed within.
 * Removing slugify filter from form ids, so they can be set as user's preferences.
-* Added CSS class 'asteriskField' for asterisks. Added CSS class 'fieldRequired' for required input labels. 
+* Added CSS class 'asteriskField' for asterisks. Added CSS class 'fieldRequired' for required input labels.
 * FAIL_SILENTLY setting has been added for making django-uni-form log errors and fail silently, based on Adam Cupiał's work.
 * Several bug fixes in MultiField.
 * Added unicode support for layout field names and improved error handling.
 * Refactored testing system and raised testing coverage.
 * Clean part of the code base and comments. All old CSRF code for supporting old versions of Django has been removed.
-* Refactored BasicNode for better readability and reducing lines of code. 
+* Refactored BasicNode for better readability and reducing lines of code.
 * Added formsets support based on Victor Nagy's (nagyv) and Antti Kaihola's (akahiola) work.
 * Bug fix in {% uni_form %} tag that didn't work without a helper and it was meant to be optional.
 * CSS classes can be set in Submit buttons.
@@ -99,11 +99,11 @@ Calling the template tags library
 Release 0.7 and higher breaks backwards compatibility with previous versions of django-uni-form . All you have to do is update templates that call on the django-uni-form template tag from::
 
     {% load uni_form %}
-    
+
 To::
 
     {% load uni_form_tags %}
-    
+
 .. _safe: https://docs.djangoproject.com/en/dev/ref/templates/builtins/#safe
 
 Miscellaneous

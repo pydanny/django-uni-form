@@ -21,11 +21,11 @@ Django-uni-form provides a filter called `as_uni_form`, that lets you render a f
 To see this more clearly, let's see a formset example all together::
 
     {% load uni_form_tags %}
-    
+
     <form method="post" class="uniForm">
         {{ my_formset|as_uni_form }}
     </form>
-    
+
 .. note:: In the beginning, this was 100% of the `original implementation`_ of this project.
 
 

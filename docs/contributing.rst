@@ -29,7 +29,7 @@ Setting up topic branches and generating pull requests
 
 While it's handy to provide useful code snippets in an issue, it is better for
 you as a developer to submit pull requests. By submitting pull request your
-contribution to django-uni-form will be recorded by Github. 
+contribution to django-uni-form will be recorded by Github.
 
 In git it is best to isolate each topic or feature into a "topic branch".  While
 individual commits allow you control over how small individual changes are made
@@ -79,7 +79,7 @@ add a comment to the discussion section of the pull request.
 Pull upstream changes into your fork regularly
 ==================================================
 
-django-uni-form is worked on by a lot of people. It is therefore critical that you pull upstream changes from master into your fork on a regular basis. Nothing is worse than putting in days of hard work into a pull request only to have it rejected because it has diverged too far from master. 
+django-uni-form is worked on by a lot of people. It is therefore critical that you pull upstream changes from master into your fork on a regular basis. Nothing is worse than putting in days of hard work into a pull request only to have it rejected because it has diverged too far from master.
 
 To pull in upstream changes::
 

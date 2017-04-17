@@ -8,7 +8,7 @@ For 0.9.0
  * Fixed a problem on Fieldset's legends internationalization. Thanks to Bojan Mihelac, see #GH-90.
  * Fixed XSS bug thanks to Charlie Denton, see #GH-98. Errors cannot be rendered safe, because field's input can be part of the error message, that would mean XSS.
  * Updating and improving docs, adding more use case examples.
- * Split `helpers.py` file into `helper.py`, `layout.py` and `utils.py`. Added a deprecation warning. 
+ * Split `helpers.py` file into `helper.py`, `layout.py` and `utils.py`. Added a deprecation warning.
  * Improved testing coverage, specially for formsets and i18n.
  * Improved rendering performance of `{% uni_form %}` tag and `|as_uni_form` filter avoiding reloading templates every time, see #GH-81.
  * Added support for Django `Form.error_css_class` and `Form.required_css_class` custom CSS classes, see #GH-87.
@@ -21,7 +21,7 @@ For 0.9.0
  * Improved `MultiField` performance avoiding instantiating BoundFields twice.
  * Fixed a bug in `MultiField` that raised an exception when internal fields had errors, because of `self.css` not existing.
  * Added an extra optional parameter to `render_field` called `layout_object`, used for storing in it a list of bound fields.
- * Refactor all Layout objects to use templates and not having hardcoded HTML in the code, based on Jonas Obrist work. Resolves Issue #GH-37 
+ * Refactor all Layout objects to use templates and not having hardcoded HTML in the code, based on Jonas Obrist work. Resolves Issue #GH-37
  * Added a Layout object called `Div`. `Row` and `Column` both inherit from `Div`
  * `Layout` can now be a child of `Layout`, see issue #GH-76.
 
@@ -50,13 +50,13 @@ http://tothinkornottothink.com/post/7339670508/new-kung-fu-in-django-uni-form-0-
  * Turning `Layout` and `Fieldset` fields attributes into lists, so that they can be changed dynamically.
  * Changing formHints from paragraphs to divs, so ul or ol can be placed within.
  * Removing slugify filter from form ids, so they can be set as user's preferences.
- * Added CSS class 'asteriskField' for asterisks. Added CSS class 'fieldRequired' for required input labels. 
+ * Added CSS class 'asteriskField' for asterisks. Added CSS class 'fieldRequired' for required input labels.
  * `UNIFORM_FAIL_SILENTLY` variable setting has been added for making django-uni-form log errors and fail silently, based on Adam Cupiał's work.
  * Several bug fixes in `MultiField`.
  * Added unicode support for layout field names and improved error handling.
  * Refactored testing system and raised testing coverage.
  * Clean part of the code base and comments. All old CSRF code for supporting old versions of Django has been removed.
- * Refactored BasicNode for better readability and reducing lines of code. 
+ * Refactored BasicNode for better readability and reducing lines of code.
  * Added formsets support based on Victor Nagy's (nagyv) and Antti Kaihola's (akahiola) work.
  * Bug fix in `{% uni_form %}` tag that didn't work without a helper and it was meant to be optional.
  * CSS classes can be set in Submit buttons.
